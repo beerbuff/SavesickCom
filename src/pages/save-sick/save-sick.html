@@ -7,16 +7,14 @@
 
 <ion-content padding id="savesick">
 
-  <ion-row>
-    <ion-col col-12>
-      <ion-list>
-        <ion-item>
-          <ion-label>เลือกเด็ก</ion-label>
-            <ion-input type="text" [(ngModel)]="student_id" >กรอกไอดีเด็ก</ion-input>
-        </ion-item>
-      </ion-list>
-    </ion-col>
-  </ion-row>
+
+
+  <ion-item>
+    <ion-label>เลือกเด็กนักเรียน</ion-label>
+    <ion-select [(ngModel)]="student_id" multiple="true" >
+      <ion-option *ngFor="let item of student" value="{{item.student_id}}" >{{item.student_name}} {{item.student_surname}}</ion-option>
+    </ion-select>
+  </ion-item>
 
   <ion-item>
     <ion-label>วันที่ป่วย : </ion-label>
@@ -24,10 +22,11 @@
   </ion-item>
 
   
-  
   <ion-item>
     <ion-label>ปีการศึกษา</ion-label>
-    <ion-input type="text"[(ngModel)]="term_id" >กรอกรหัสเทอม</ion-input>
+    <ion-select [(ngModel)]="term_id" multiple="true" >
+      <ion-option *ngFor="let term of term" value="{{term.term_id}}" >{{term.term_num}}/{{term.term_years}}</ion-option>
+    </ion-select>
   </ion-item>
 
   <ion-item>
@@ -40,6 +39,5 @@
       <button ion-button (click)="postJson(student_id,sick_date,term_id,sick_description)"  >บันทึก</button>
 
 
-  <h2>{{returnMsg}}</h2>
 
 </ion-content>

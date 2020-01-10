@@ -4,6 +4,9 @@ import { QrScantwoPage } from '../qr-scantwo/qr-scantwo';
 import { CheckstudytwoPage } from '../checkstudytwo/checkstudytwo';
 import { SaveSicktwoPage } from '../save-sicktwo/save-sicktwo';
 import { StudentviewtwoPage } from '../studentviewtwo/studentviewtwo';
+import { Storage } from '@ionic/storage';
+import { WelcomePage } from '../welcome/welcome';
+
 
 /**
  * Generated class for the MenuteachertwoPage page.
@@ -19,11 +22,13 @@ import { StudentviewtwoPage } from '../studentviewtwo/studentviewtwo';
 })
 export class MenuteachertwoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage: Storage) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuteachertwoPage');
+    console.log(this.storage);
+
   }
   QrScantwo(){
     this.navCtrl.push(QrScantwoPage)
@@ -37,5 +42,21 @@ export class MenuteachertwoPage {
   Studentviewtwo(){
     this.navCtrl.push(StudentviewtwoPage)
   }
+
+  clearst(){
+
+   
+  
+    this.storage.clear();
+    // this.storage.get('teacher_id').then((val) => {
+   
+    //   if(val == null){
+       this.navCtrl.push(WelcomePage)
+    //     console.log(val);
+    //   }
+    // })
+   
+}
+
 
 }// end class

@@ -39,9 +39,10 @@ export class LoginPage {
 
 
   Testlog(username, password) {
+    
 
     var url = 'http://127.0.0.1/servicephp/getteacher.php?username=' + username + '&password=' + password;
-    console.log(url);
+ 
     this.data = this.http.get(url, username);
     this.data = this.http.get(url, password);
 
@@ -56,20 +57,19 @@ export class LoginPage {
       if (data.teacher_id == null) {
         alert("ไม่มีusernameนี้ในระบบ");
       } else if (data.grade == '1') {
-        alert(data.grade);
+        alert(data.teacher_id);
         this.navCtrl.push(MenuteacherPage);
       } else if (data.grade == '2') {
-        alert(data.grade);
+        alert(data.teacher_id);
         this.navCtrl.push(MenuteachertwoPage);
       } else if (data.grade == '3') {
-        alert(data.grade);
+        alert(data.teacher_id);
         this.navCtrl.push(MenuteacherthreePage);
       } else {
         
         this.loginResult = "Faild";
       }
 
-      console.log(data);
 
 
     });

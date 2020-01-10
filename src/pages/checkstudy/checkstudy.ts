@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import { MenuteacherPage } from '../menuteacher/menuteacher';
+import { Storage } from '@ionic/storage';
 
 
 /**
@@ -16,10 +18,13 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'checkstudy.html',
 })
 export class CheckstudyPage {
-  studentcheck = [];
+  student = [];
+  term = '';
+  teacher='';
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient, private storage: Storage) {
     this.loadstudentcheckData();
   }
 
@@ -28,13 +33,36 @@ export class CheckstudyPage {
   }
 
   loadstudentcheckData(){
-    let url = "http://localhost/servicephp/getstudent.php";
+    let url = "http://localhost/servicephp/testsick.php";
     this.http.get(url).subscribe((data: any) => {
-      this.studentcheck = data.student;
-      console.log(this.studentcheck);
+      this.student = data.student;
+      this.term = data.term;
+   
     }, (error) => { console.log(error) });
 
   }
+
+  
+postJson(ac_date, student_id, term_id) {
+  this.storage.get('teacher_id').then((val) => {
+  console.log("teacher_id is", val);
+  let jsonData = { ac_date: ac_date, student_id: student_id, teacher_id: val,term_id: term_id }; //สร้าง obj
+  console.log(jsonData);
+  let url = 'http://localhost/servicephp/serviceattend.php'; //ให้ไป post ที่  url
+  this.http.post(url, jsonData,).subscribe((data: any) => {
+    // console.log(jsonData);
+    alert("บันทึกเรียบร้อยแล้ว");
+    this.navCtrl.push(MenuteacherPage)
+    console.log(data);
+  
+  });
+
+  //method post รับค่ามา 2 ค่า คือ url เว็บที่ต้องการโพสไป , obj 
+  //subscribe ใส่  arrow  function ใส่ค่าเป็น data : any ข้อมูลอะไรก็ได้
+})
+
+}
+
 
 
 

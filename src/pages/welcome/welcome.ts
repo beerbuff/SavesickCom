@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { TestloginPage } from '../testlogin/testlogin';
+import { Storage } from '@ionic/storage';
+
 
 /**
  * Generated class for the WelcomePage page.
@@ -17,7 +19,7 @@ import { TestloginPage } from '../testlogin/testlogin';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -25,8 +27,11 @@ export class WelcomePage {
   }
 
   login(){
+   
     this.navCtrl.push(LoginPage)
   }
+
+
   test(){
     this.navCtrl.push(TestloginPage)
   }

@@ -4,6 +4,8 @@ import { ActivityviewPage } from '../activityview/activityview';
 import { QrCodePaPage } from '../qr-code-pa/qr-code-pa';
 import { BmiviewPage } from '../bmiview/bmiview';
 import { WelcomePage } from '../welcome/welcome';
+import { Storage } from '@ionic/storage';
+
 
 
 /**
@@ -22,7 +24,7 @@ import { WelcomePage } from '../welcome/welcome';
 export class MenuparentPage {
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage: Storage) {
   }
 
 activityView(){
@@ -37,10 +39,7 @@ Bmiview(){
   this.navCtrl.push(BmiviewPage)
 
 }
-logout(){
-  localStorage.clear(); //becausae i have information from user
-  console.log(localStorage.clear);
-  this.navCtrl.push(WelcomePage)
-}
+
+
 
 }//end class

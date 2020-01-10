@@ -11,73 +11,35 @@
 </ion-header>
 
 <ion-content padding id="savesicktwo">
-  <ion-row>
-    <ion-col col-12>
-      <ion-avatar>
-        <ion-label text-center>เด็กหญิงศศิประภา ยูหนู</ion-label>
-      </ion-avatar>
-    </ion-col>
-  </ion-row>
 
-  <!-- loop -->
-  <ion-row>
-    <ion-col col-12>
-      <ion-list radio-group>
-        <ion-list-header>
-          อาการป่วย
-        </ion-list-header>
-
-        <ion-item>
-          
-          <ion-label>สาเหตุการลาป่วย</ion-label>
-          <ion-input type="" [(ngModel)]="leave_description"></ion-input>
-        </ion-item>
-
-        
-        <ion-item>
  
-          <ion-label>ปีการศึกษา</ion-label>
-          <ion-input  [(ngModel)]="term_id" value="1/2019"> </ion-input>         
-        </ion-item>
-
-
-      </ion-list>
-    </ion-col>
-  </ion-row>
-
-  <!-- วันที่ -->
   <ion-item>
-    <ion-icon name="calendar"></ion-icon>
-    <ion-label>เริ่มลา : </ion-label>
-    <ion-datetime displayFormat="DD/MMMM/YYYY" [(ngModel)]="leave_startdate"></ion-datetime>
+    <ion-label>เลือกเด็กนักเรียน</ion-label>
+    <ion-select [(ngModel)]="student_id" multiple="true" >
+      <ion-option *ngFor="let item of student" value="{{item.student_id}}" >{{item.student_name}} {{item.student_surname}}</ion-option>
+    </ion-select>
   </ion-item>
 
-  <ion-row>
-    <ion-col col-12>
-      <ion-label>ถึง</ion-label>
-    </ion-col>
-  </ion-row>
+  <ion-item>
+    <ion-label>วันที่ป่วย : </ion-label>
+    <ion-datetime displayFormat="DD/MMMM/YYYY" [(ngModel)]="sick_date"></ion-datetime>
+  </ion-item>
+
+  
+  <ion-item>
+    <ion-label>ปีการศึกษา</ion-label>
+    <ion-select [(ngModel)]="term_id" multiple="true" >
+      <ion-option *ngFor="let term of term" value="{{term.term_id}}" >{{term.term_num}}/{{term.term_years}}</ion-option>
+    </ion-select>
+  </ion-item>
 
   <ion-item>
-    <ion-label>สิ้นสุดวันลา : </ion-label>
-    <ion-datetime displayFormat="DD/MMMM/YYYY" [(ngModel)]="leave_enddate"></ion-datetime>
+    <ion-label>สาเหตุการป่วย</ion-label>
+    <ion-input type="text" [(ngModel)]="sick_description" placeholder="กรอกอาการป่วย"></ion-input>
   </ion-item>
-  <!-- วันที่ -->
 
-  <br>
-  <br>
-
-  <!-- ปุ่ม -->
-  <ion-row>
-    <ion-col col-12 text-center>
-      <button ion-button (click)="postSick(leave_description,term_id,leave_startdate,leave_enddate)"  >บันทึก</button>
-    </ion-col>
-  </ion-row>
-  <!-- ปุ่ม -->
-  <br>
-
-
-  <h2>{{returnSick}}</h2>
-  <!-- end -->
+     
+      
+      <button ion-button (click)="postJson(student_id,sick_date,term_id,sick_description)"  >บันทึก</button>
 
 </ion-content>

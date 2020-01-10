@@ -4,6 +4,9 @@ import { QrScanPage } from '../qr-scan/qr-scan';
 import { SaveSickPage } from '../save-sick/save-sick';
 import { StudentviewPage } from '../studentview/studentview';
 import { CheckstudyPage } from '../checkstudy/checkstudy';
+import { WelcomePage } from '../welcome/welcome';
+import { Storage } from '@ionic/storage';
+
 
 /**
  * Generated class for the MenuteacherPage page.
@@ -19,11 +22,12 @@ import { CheckstudyPage } from '../checkstudy/checkstudy';
 })
 export class MenuteacherPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage: Storage) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuteacherPage');
+
   }
   QrScan(){
     this.navCtrl.push(QrScanPage)
@@ -39,8 +43,21 @@ export class MenuteacherPage {
   }
 
 
+  clearst(){
+
+   
+  
+      this.storage.clear();
+      // this.storage.get('teacher_id').then((val) => {
+     
+      //   if(val == null){
+         this.navCtrl.push(WelcomePage)
+      //     console.log(val);
+      //   }
+      // })
+     
+  }
 
 
 
-
-}
+}//end class
